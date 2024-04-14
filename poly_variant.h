@@ -1,10 +1,11 @@
+#ifndef poly_variant_h_INCLUDED
+#define poly_variant_h_INCLUDED
+
 #include <variant>
 
 template <typename Base, typename... Derived>
-class poly_variant {
-private:
-    std::variant<Derived...> data;
-
+class poly_variant
+{
 public:
     poly_variant() = default;
 
@@ -15,4 +16,9 @@ public:
     {
         return std::visit([](auto& value) -> Base* { return &value; }, data);
     }
+    
+private:
+    std::variant<Derived...> data;
 };
+
+#endif
